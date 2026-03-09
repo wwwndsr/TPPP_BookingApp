@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="../BookingApp.BusinessLogic/BookingApp.BusinessLogic.csproj" Id="2323a39f-92ce-4fc3-9dcf-dde184df55ae" />
+  <Project Path="../BookingApp.Domain/BookingApp.Domain.csproj" Id="d7c02222-d990-4a29-bfee-0c151e5d9727" />
+  <Project Path="BookingApp.csproj" />
+</Solution>
