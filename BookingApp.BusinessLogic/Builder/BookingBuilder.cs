@@ -32,34 +32,10 @@ namespace BookingApp.BusinessLogic.Builder
             return this;
         }
 
-        public IBookingBuilder AddBreakfast()
-        {
-            _booking.Services.Add("Завтрак");
-            return this;
-        }
-
-        public IBookingBuilder AddTransfer()
-        {
-            _booking.Services.Add("Трансфер");
-            return this;
-        }
-
-        public IBookingBuilder AddMinibar()
-        {
-            _booking.Services.Add("Мини-бар");
-            return this;
-        }
-
-        public IBookingBuilder AddLateCheckout()
-        {
-            _booking.Services.Add("Поздний выезд");
-            return this;
-        }
-
         public Booking Build()
         {
             var result = _booking;
-            _booking = new(); // сброс для следующего использования
+            _booking = new();
             return result;
         }
     }

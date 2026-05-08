@@ -12,10 +12,6 @@ namespace BookingApp.BusinessLogic.Builder
         IBookingBuilder SetGuest(string name, string email);
         IBookingBuilder SetHotel(IHotelFactory hotel);
         IBookingBuilder SetRoom(Room room);
-        IBookingBuilder AddBreakfast();
-        IBookingBuilder AddTransfer();
-        IBookingBuilder AddMinibar();
-        IBookingBuilder AddLateCheckout();
         Booking Build();
     }
 }

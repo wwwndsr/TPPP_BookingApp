@@ -16,7 +16,7 @@ namespace BookingApp.BusinessLogic.Prototype
 
         public Booking CloneBooking(Booking source, string newGuestName = "")
         {
-            ArgumentNullException.ThrowIfNull(source);  // Modern syntax
+            ArgumentNullException.ThrowIfNull(source);  
 
             var clone = (Booking)source.Clone();
             clone.Id = 0;
@@ -37,7 +37,7 @@ namespace BookingApp.BusinessLogic.Prototype
             if (count <= 0 || count > 50)
                 throw new ArgumentException("Количество копий должно быть от 1 до 50");
 
-            var clones = new List<Booking>(count);  // Pre-size the list
+            var clones = new List<Booking>(count);  
 
             for (int i = 1; i <= count; i++)
             {

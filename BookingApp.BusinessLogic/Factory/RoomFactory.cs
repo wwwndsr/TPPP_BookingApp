@@ -19,17 +19,5 @@ namespace BookingApp.BusinessLogic.Factory
                 _ => new SingleRoom()
             };
         }
-
-        // Дополнительный метод для создания по строке
-        public Room CreateRoom(string typeName)
-        {
-            return typeName.ToLower() switch
-            {
-                "single" => new SingleRoom(),
-                "lux" => new LuxRoom(),
-                "apartment" => new Apartment(),
-                _ => new SingleRoom()
-            };
-        }
     }
 }

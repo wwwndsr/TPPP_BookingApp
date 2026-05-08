@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BookingApp"
         mc:Ignorable="d"
         Title="Booking App" 
-        Height="650" Width="900"
+        Height="750" Width="900"
         WindowStartupLocation="CenterScreen"
         FontFamily="Segoe UI"
         Background="#F5F5F5">
@@ -173,18 +173,375 @@
                     </StackPanel>
                 </Border>
 
-                <!-- 4. Данные гостя с placeholder -->
+                <!-- 4. ВЫБОР ВАЛЮТЫ (Adapter) -->
                 <Border Background="White" 
                         CornerRadius="10" 
                         Padding="20" 
-                        Margin="0,0,0,15">
+                        Margin="0,0,0,15"
+                        BorderBrush="#16A085" 
+                        BorderThickness="2">
                     <StackPanel>
-                        <TextBlock Text="4. ДАННЫЕ ГОСТЯ" 
+                        <TextBlock Text="4. ВЫБОР ВАЛЮТЫ (Adapter)" 
                                    FontSize="16" 
                                    FontWeight="SemiBold" 
-                                   Foreground="#34495E" 
+                                   Foreground="#16A085" 
                                    Margin="0,0,0,15"/>
 
+                        <WrapPanel>
+                            <RadioButton x:Name="rdEuro" 
+                                         Content="Евро (€)" 
+                                         GroupName="Currency"
+                                         IsChecked="True"
+                                         FontSize="14" 
+                                         Margin="0,5,30,5"
+                                         Checked="Currency_Changed"/>
+
+                            <RadioButton x:Name="rdDollar" 
+                                         Content="Доллар ($)" 
+                                         GroupName="Currency"
+                                         FontSize="14" 
+                                         Margin="0,5,30,5"
+                                         Checked="Currency_Changed"/>
+
+                            <RadioButton x:Name="rdLei" 
+                                         Content="Молдавский лей (Lei)" 
+                                         GroupName="Currency"
+                                         FontSize="14" 
+                                         Margin="0,5"
+                                         Checked="Currency_Changed"/>
+                        </WrapPanel>
+
+                        <TextBlock x:Name="txtCurrencyInfo" 
+                                   Text="Цена будет автоматически конвертирована в выбранную валюту" 
+                                   Foreground="#7F8C8D" 
+                                   FontSize="12" 
+                                   FontStyle="Italic" 
+                                   Margin="0,10,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- 5. FACADE - Быстрое бронирование -->
+                <Border Background="White" 
+                        CornerRadius="10" 
+                        Padding="20" 
+                        Margin="0,0,0,15"
+                        BorderBrush="#8E44AD" 
+                        BorderThickness="2">
+                    <StackPanel>
+                        <TextBlock Text="5. БЫСТРОЕ БРОНИРОВАНИЕ (Facade)" 
+                                   FontSize="16" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="#8E44AD" 
+                                   Margin="0,0,0,15"/>
+
+                        <Border Background="#FDF2E9" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="🌹 Romantic" FontWeight="Bold" Foreground="#8E44AD" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" Text="Люкс + Завтрак + Мини-бар + Ужин + Шампанское" FontSize="12" Foreground="#555" VerticalAlignment="Center"/>
+                                <Button x:Name="btnRomantic" Grid.Column="2" Content="€750" Width="80" Height="30" Background="#8E44AD" Foreground="White" FontSize="12" FontWeight="Bold" Click="BtnRomantic_Click" Tag="Romantic"/>
+                            </Grid>
+                        </Border>
+
+                        <Border Background="#E8F4FD" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="💼 Business" FontWeight="Bold" Foreground="#2980B9" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" Text="Одноместный + Завтрак + Трансфер + Бизнес-ланч + Wi-Fi" FontSize="12" Foreground="#555" VerticalAlignment="Center"/>
+                                <Button x:Name="btnBusiness" Grid.Column="2" Content="€450" Width="80" Height="30" Background="#2980B9" Foreground="White" FontSize="12" FontWeight="Bold" Click="BtnBusiness_Click" Tag="Business"/>
+                            </Grid>
+                        </Border>
+
+                        <Border Background="#E8F8F5" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="👨‍👩‍👧 Family" FontWeight="Bold" Foreground="#27AE60" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" Text="Апартаменты + Завтрак + Трансфер + Мини-бар + Детская кроватка" FontSize="12" Foreground="#555" VerticalAlignment="Center"/>
+                                <Button x:Name="btnFamily" Grid.Column="2" Content="€950" Width="80" Height="30" Background="#27AE60" Foreground="White" FontSize="12" FontWeight="Bold" Click="BtnFamily_Click" Tag="Family"/>
+                            </Grid>
+                        </Border>
+
+                        <Border Background="#F4F4F4" CornerRadius="8" Padding="10" Margin="0,10,0,0">
+                            <StackPanel>
+                                <TextBlock Text="📋 ПРЕДПРОСМОТР ПАКЕТА" FontSize="12" FontWeight="Bold" Foreground="#555"/>
+                                <TextBlock x:Name="txtPackagePreview" Text="Нажмите на любой пакет выше для предпросмотра" FontSize="11" Foreground="#888" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- 6. COMPOSITE - Групповые бронирования -->
+                <Border Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,15" BorderBrush="#E67E22" BorderThickness="2">
+                    <StackPanel>
+                        <TextBlock Text="6. ГРУППОВЫЕ БРОНИРОВАНИЯ (Composite)" FontSize="16" FontWeight="SemiBold" Foreground="#E67E22" Margin="0,0,0,15"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Создать группу:" FontSize="14" FontWeight="SemiBold"/>
+                                <TextBox x:Name="txtGroupName" Height="30" Padding="5" Margin="0,5,0,10" Text="Тургруппа"/>
+                            </StackPanel>
+                            <Button x:Name="btnCreateGroup" Grid.Column="1" Content="➕ Создать группу" Width="150" Height="35" Background="#E67E22" Foreground="White" FontSize="12" FontWeight="Bold" Margin="10,25,0,0" Click="BtnCreateGroup_Click"/>
+                        </Grid>
+
+                        <ListBox x:Name="lstGroups" Height="120" Margin="0,10,0,0" SelectionChanged="LstGroups_SelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DisplayText}" FontSize="12"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <Border Background="#FFF8E1" CornerRadius="8" Padding="10" Margin="0,10,0,0">
+                            <TextBlock x:Name="txtGroupInfo" Text="Выберите группу для просмотра деталей" FontSize="11" Foreground="#555" TextWrapping="Wrap"/>
+                        </Border>
+
+                        <WrapPanel Margin="0,10,0,0">
+                            <Button x:Name="btnAddCurrentBooking" Content="➕ Добавить текущую бронь в группу" Width="220" Height="30" Background="#3498DB" Foreground="White" FontSize="11" Margin="0,0,10,0" Click="BtnAddCurrentBooking_Click"/>
+                            <Button x:Name="btnShowGroupTotal" Content="💰 Показать общую стоимость" Width="180" Height="30" Background="#27AE60" Foreground="White" FontSize="11" Click="BtnShowGroupTotal_Click"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- 7. OBSERVER - Уведомления -->
+                <Border Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,15" BorderBrush="#1ABC9C" BorderThickness="2">
+                    <StackPanel>
+                        <TextBlock Text="7. УВЕДОМЛЕНИЯ (Observer)" FontSize="16" FontWeight="SemiBold" Foreground="#1ABC9C" Margin="0,0,0,15"/>
+                        <WrapPanel>
+                            <CheckBox x:Name="chkEmailNotify" Content="📧 Email" IsChecked="True" FontSize="13" Margin="0,5,20,5"/>
+                            <CheckBox x:Name="chkSmsNotify" Content="📱 SMS" IsChecked="True" FontSize="13" Margin="0,5,20,5"/>
+                            <CheckBox x:Name="chkPushNotify" Content="🔔 Push" IsChecked="True" FontSize="13" Margin="0,5,0,5"/>
+                        </WrapPanel>
+                        <TextBox x:Name="txtNotificationLog" Height="80" Margin="0,10,0,0" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" FontSize="11" Background="#F9F9F9"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- 8. STRATEGY - Способы оплаты -->
+                <Border Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,15" BorderBrush="#F39C12" BorderThickness="2">
+                    <StackPanel>
+                        <TextBlock Text="8. СПОСОБ ОПЛАТЫ (Strategy)" FontSize="16" FontWeight="SemiBold" Foreground="#F39C12" Margin="0,0,0,15"/>
+                        <WrapPanel>
+                            <RadioButton x:Name="rdCardPayment" Content="💳 Банковская карта" GroupName="PaymentMethod" IsChecked="True" FontSize="13" Margin="0,5,20,5" Checked="PaymentStrategy_Changed"/>
+                            <RadioButton x:Name="rdCashPayment" Content="💵 Наличные (в отеле)" GroupName="PaymentMethod" FontSize="13" Margin="0,5,20,5" Checked="PaymentStrategy_Changed"/>
+                            <RadioButton x:Name="rdPayPalPayment" Content="📱 PayPal" GroupName="PaymentMethod" FontSize="13" Margin="0,5,0,5" Checked="PaymentStrategy_Changed"/>
+                        </WrapPanel>
+                        <Border Background="#FFF8E1" CornerRadius="8" Padding="10" Margin="0,10,0,0">
+                            <TextBlock x:Name="txtPaymentInfo" Text="💳 Оплата картой ****1234 (владелец: Иван Иванов)" FontSize="11" Foreground="#555" TextWrapping="Wrap"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- 9. COMMAND - Управление бронированиями -->
+                <Border Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,15" BorderBrush="#E74C3C" BorderThickness="2">
+                    <StackPanel>
+                        <TextBlock Text="9. УПРАВЛЕНИЕ БРОНИРОВАНИЯМИ (Command)" FontSize="16" FontWeight="SemiBold" Foreground="#E74C3C" Margin="0,0,0,15"/>
+
+                        <TextBlock Text="Выберите бронь:" FontSize="13" FontWeight="SemiBold"/>
+                        <ComboBox x:Name="cmbBookingForCommand" Height="30" Margin="0,5,0,10" DisplayMemberPath="DisplayText" SelectionChanged="CmbBookingForCommand_SelectionChanged"/>
+
+                        <WrapPanel Margin="0,10,0,0">
+                            <Button x:Name="btnConfirmBooking" Content="✅ Подтвердить бронь" Width="160" Height="35" Background="#27AE60" Foreground="White" FontSize="12" Margin="0,0,10,5" Click="BtnConfirmBooking_Click"/>
+                            <Button x:Name="btnCancelBooking" Content="❌ Отменить бронь" Width="160" Height="35" Background="#E74C3C" Foreground="White" FontSize="12" Margin="0,0,10,5" Click="BtnCancelBooking_Click"/>
+                            <Button x:Name="btnUndo" Content="↩️ Отменить последнее действие" Width="180" Height="35" Background="#F39C12" Foreground="White" FontSize="12" Margin="0,0,10,5" Click="BtnUndo_Click"/>
+                            <Button x:Name="btnRedo" Content="↪️ Вернуть действие" Width="160" Height="35" Background="#3498DB" Foreground="White" FontSize="12" Click="BtnRedo_Click"/>
+                        </WrapPanel>
+
+                        <Border Background="#FDEDEC" CornerRadius="8" Padding="10" Margin="0,10,0,0">
+                            <TextBlock x:Name="txtCommandStatus" Text="Выберите бронь для управления" FontSize="11" Foreground="#555" TextWrapping="Wrap"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- 10. STATE - Управление состояниями -->
+                <Border Background="White" 
+        CornerRadius="10" 
+        Padding="20" 
+        Margin="0,0,0,15"
+        BorderBrush="#9B59B6" 
+        BorderThickness="2">
+                    <StackPanel>
+                        <TextBlock Text="10. УПРАВЛЕНИЕ СОСТОЯНИЯМИ (State)" 
+                   FontSize="16" 
+                   FontWeight="SemiBold" 
+                   Foreground="#9B59B6" 
+                   Margin="0,0,0,15"/>
+
+                        <TextBlock Text="Выберите бронь для управления состоянием:" FontSize="13" FontWeight="SemiBold"/>
+                        <ComboBox x:Name="cmbBookingForState" 
+                  Height="30" 
+                  Margin="0,5,0,10"
+                  DisplayMemberPath="DisplayText"
+                  SelectionChanged="CmbBookingForState_SelectionChanged"/>
+
+                        <WrapPanel Margin="0,10,0,0">
+                            <Button x:Name="btnStateConfirm" 
+                    Content="✅ Подтвердить" 
+                    Width="100" 
+                    Height="35" 
+                    Background="#27AE60" 
+                    Foreground="White" 
+                    FontSize="12"
+                    Margin="0,0,10,5"
+                    Click="BtnStateConfirm_Click"/>
+
+                            <Button x:Name="btnStateCancel" 
+                    Content="❌ Отменить" 
+                    Width="100" 
+                    Height="35" 
+                    Background="#E74C3C" 
+                    Foreground="White" 
+                    FontSize="12"
+                    Margin="0,0,10,5"
+                    Click="BtnStateCancel_Click"/>
+
+                            <Button x:Name="btnStateComplete" 
+                    Content="🏁 Завершить" 
+                    Width="100" 
+                    Height="35" 
+                    Background="#3498DB" 
+                    Foreground="White" 
+                    FontSize="12"
+                    Click="BtnStateComplete_Click"/>
+                        </WrapPanel>
+
+                        <!-- Информация о состоянии -->
+                        <Border Background="#F4F4F4" 
+                CornerRadius="8" 
+                Padding="10" 
+                Margin="0,10,0,0">
+                            <StackPanel>
+                                <TextBlock Text="📊 ТЕКУЩЕЕ СОСТОЯНИЕ" FontSize="12" FontWeight="Bold" Foreground="#555"/>
+                                <TextBlock x:Name="txtStateInfo" 
+                           Text="Выберите бронь для управления" 
+                           FontSize="11" 
+                           Foreground="#888"
+                           TextWrapping="Wrap"/>
+                                <TextBlock x:Name="txtAvailableActions" 
+                           Text="" 
+                           FontSize="11" 
+                           Foreground="#27AE60"
+                           TextWrapping="Wrap"
+                           Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- 11. MEDIATOR - Чат поддержки -->
+                <Border Background="White" 
+        CornerRadius="10" 
+        Padding="20" 
+        Margin="0,0,0,15"
+        BorderBrush="#1ABC9C" 
+        BorderThickness="2">
+                    <StackPanel>
+                        <TextBlock Text="11. ЧАТ ПОДДЕРЖКИ (Mediator)" 
+                   FontSize="16" 
+                   FontWeight="SemiBold" 
+                   Foreground="#1ABC9C" 
+                   Margin="0,0,0,15"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox x:Name="txtChatMessage" 
+                     Grid.Column="0"
+                     Height="30" 
+                     Padding="5"
+                     VerticalAlignment="Center"
+                     Text="Введите сообщение..."
+                     GotFocus="TxtChatMessage_GotFocus"
+                     LostFocus="TxtChatMessage_LostFocus"/>
+
+                            <Button x:Name="btnSendMessage" 
+                    Grid.Column="1" 
+                    Content="📤 Отправить" 
+                    Width="100" 
+                    Height="30" 
+                    Background="#1ABC9C" 
+                    Foreground="White" 
+                    FontSize="12"
+                    Margin="10,0,0,0"
+                    Click="BtnSendMessage_Click"/>
+                        </Grid>
+
+                        <ListBox x:Name="lstChatLog" 
+                 Height="150" 
+                 Margin="0,10,0,0"
+                 Background="#F9F9F9">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" FontSize="11" TextWrapping="Wrap"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <WrapPanel Margin="0,10,0,0">
+                            <Button x:Name="btnAddClient" 
+                    Content="👤 Добавить пользователя" 
+                    Width="160" 
+                    Height="30" 
+                    Background="#3498DB" 
+                    Foreground="White" 
+                    FontSize="11"
+                    Margin="0,0,10,0"
+                    Click="BtnAddClient_Click"/>
+
+                            <Button x:Name="btnAddAdmin" 
+                    Content="👩‍💼 Добавить оператора" 
+                    Width="160" 
+                    Height="30" 
+                    Background="#E74C3C" 
+                    Foreground="White" 
+                    FontSize="11"
+                    Margin="0,0,10,0"
+                    Click="BtnAddAdmin_Click"/>
+
+                            <Button x:Name="btnClearChat" 
+                    Content="🗑 Очистить чат" 
+                    Width="120" 
+                    Height="30" 
+                    Background="#95A5A6" 
+                    Foreground="White" 
+                    FontSize="11"
+                    Click="BtnClearChat_Click"/>
+                        </WrapPanel>
+
+                        <Border Background="#F4F4F4" 
+                CornerRadius="8" 
+                Padding="10" 
+                Margin="0,10,0,0">
+                            <TextBlock x:Name="txtChatInfo"     
+                       Text="Участники чата: 👤 Пользователь, 👩‍💼 Оператор, 🤖 Бот" 
+                       FontSize="11" 
+                       Foreground="#555"
+                       TextWrapping="Wrap"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- Данные гостя -->
+                <Border Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,15">
+                    <StackPanel>
+                        <TextBlock Text="ДАННЫЕ ГОСТЯ" FontSize="16" FontWeight="SemiBold" Foreground="#34495E" Margin="0,0,0,15"/>
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -194,59 +551,15 @@
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-
-                            <TextBlock Grid.Row="0" Grid.Column="0" 
-                                       Text="Имя:" 
-                                       FontSize="14" 
-                                       VerticalAlignment="Center"/>
-
-                            <!-- Поле для имени с placeholder -->
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Имя:" FontSize="14" VerticalAlignment="Center"/>
                             <Grid Grid.Row="0" Grid.Column="1" Height="30" Margin="0,0,0,10">
-                                <TextBox x:Name="txtGuestName" 
-                                         Height="30" 
-                                         Padding="5"
-                                         VerticalAlignment="Center"
-                                         Background="Transparent"
-                                         BorderBrush="#CCCCCC"
-                                         BorderThickness="1"
-                                         TextChanged="txtGuestName_TextChanged"
-                                         GotFocus="txtGuestName_GotFocus"
-                                         LostFocus="txtGuestName_LostFocus"/>
-
-                                <TextBlock x:Name="txtGuestNamePlaceholder" 
-                                           Text="Введите ФИО" 
-                                           Foreground="Gray"
-                                           IsHitTestVisible="False"
-                                           VerticalAlignment="Center"
-                                           Margin="5,0,0,0"
-                                           Visibility="Visible"/>
+                                <TextBox x:Name="txtGuestName" Height="30" Padding="5" VerticalAlignment="Center" Background="Transparent" BorderBrush="#CCCCCC" BorderThickness="1" TextChanged="txtGuestName_TextChanged" GotFocus="txtGuestName_GotFocus" LostFocus="txtGuestName_LostFocus"/>
+                                <TextBlock x:Name="txtGuestNamePlaceholder" Text="Введите ФИО" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="5,0,0,0" Visibility="Visible"/>
                             </Grid>
-
-                            <TextBlock Grid.Row="1" Grid.Column="0" 
-                                       Text="Email:" 
-                                       FontSize="14" 
-                                       VerticalAlignment="Center"/>
-
-                            <!-- Поле для email с placeholder -->
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Email:" FontSize="14" VerticalAlignment="Center"/>
                             <Grid Grid.Row="1" Grid.Column="1" Height="30">
-                                <TextBox x:Name="txtGuestEmail" 
-                                         Height="30" 
-                                         Padding="5"
-                                         VerticalAlignment="Center"
-                                         Background="Transparent"
-                                         BorderBrush="#CCCCCC"
-                                         BorderThickness="1"
-                                         TextChanged="txtGuestEmail_TextChanged"
-                                         GotFocus="txtGuestEmail_GotFocus"
-                                         LostFocus="txtGuestEmail_LostFocus"/>
-
-                                <TextBlock x:Name="txtGuestEmailPlaceholder" 
-                                           Text="Введите e-mail" 
-                                           Foreground="Gray"
-                                           IsHitTestVisible="False"
-                                           VerticalAlignment="Center"
-                                           Margin="5,0,0,0"
-                                           Visibility="Visible"/>
+                                <TextBox x:Name="txtGuestEmail" Height="30" Padding="5" VerticalAlignment="Center" Background="Transparent" BorderBrush="#CCCCCC" BorderThickness="1" TextChanged="txtGuestEmail_TextChanged" GotFocus="txtGuestEmail_GotFocus" LostFocus="txtGuestEmail_LostFocus"/>
+                                <TextBlock x:Name="txtGuestEmailPlaceholder" Text="Введите e-mail" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="5,0,0,0" Visibility="Visible"/>
                             </Grid>
                         </Grid>
                     </StackPanel>
@@ -254,44 +567,20 @@
             </StackPanel>
         </ScrollViewer>
 
-        <!-- Панель с текущим пакетом и итоговой ценой -->
-        <Border Grid.Row="2" 
-                Background="#34495E" 
-                CornerRadius="10" 
-                Padding="20" 
-                Margin="0,0,0,15">
+        <!-- Панель с текущим пакетом -->
+        <Border Grid.Row="2" Background="#34495E" CornerRadius="10" Padding="20" Margin="0,0,0,15">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-
                 <StackPanel Grid.Column="0">
-                    <TextBlock Text="ТЕКУЩИЙ ПАКЕТ БРОНИРОВАНИЯ" 
-                               FontSize="16" 
-                               FontWeight="Bold" 
-                               Foreground="White" 
-                               Margin="0,0,0,10"/>
-
-                    <TextBlock x:Name="txtBookingSummary" 
-                               Text="Отель: не выбран | Номер: не выбран | Услуги: нет" 
-                               Foreground="#ECF0F1" 
-                               FontSize="14" 
-                               TextWrapping="Wrap"/>
+                    <TextBlock Text="ТЕКУЩИЙ ПАКЕТ БРОНИРОВАНИЯ" FontSize="16" FontWeight="Bold" Foreground="White" Margin="0,0,0,10"/>
+                    <TextBlock x:Name="txtBookingSummary" Text="Отель: не выбран | Номер: не выбран | Услуги: нет" Foreground="#ECF0F1" FontSize="14" TextWrapping="Wrap"/>
                 </StackPanel>
-
-                <StackPanel Grid.Column="1" 
-                            HorizontalAlignment="Right">
-                    <TextBlock Text="ИТОГО:" 
-                               FontSize="14" 
-                               Foreground="#F1C40F" 
-                               HorizontalAlignment="Right"/>
-
-                    <TextBlock x:Name="txtTotalPrice" 
-                               Text="€0" 
-                               FontSize="28" 
-                               FontWeight="Bold" 
-                               Foreground="#F1C40F"/>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                    <TextBlock Text="ИТОГО:" FontSize="14" Foreground="#F1C40F" HorizontalAlignment="Right"/>
+                    <TextBlock x:Name="txtTotalPrice" Text="€0" FontSize="28" FontWeight="Bold" Foreground="#F1C40F"/>
                 </StackPanel>
             </Grid>
         </Border>
@@ -303,21 +592,11 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="20"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Кнопка для Prototype (будет открывать окно клонирования) -->
-            <Button x:Name="btnCloneBooking" 
-                    Grid.Column="1" 
-                    Content="Клонировать бронь" 
-                    Width="200" 
-                    Height="40" 
-                    Background="#9B59B6" 
-                    Foreground="White" 
-                    FontSize="14" 
-                    FontWeight="SemiBold" 
-                    BorderThickness="0"
-                    Cursor="Hand"
-                    Click="BtnCloneBooking_Click">
+            <Button x:Name="btnAdminPanel" Grid.Column="1" Content="🔒 Админ-панель (Proxy)" Width="180" Height="40" Background="#E74C3C" Foreground="White" FontSize="12" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand" Click="BtnAdminPanel_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20"/>
@@ -325,34 +604,29 @@
                 </Button.Resources>
             </Button>
 
-            <Button x:Name="btnBookNow" 
-                    Grid.Column="3" 
-                    Content="ЗАБРОНИРОВАТЬ" 
-                    Width="200" 
-                    Height="40" 
-                    Background="#27AE60" 
-                    Foreground="White" 
-                    FontSize="14" 
-                    FontWeight="Bold" 
-                    BorderThickness="0"
-                    Cursor="Hand"
-                    Click="btnBookNow_Click">
+            <Button x:Name="btnCloneBooking" Grid.Column="3" Content="Клонировать бронь" Width="200" Height="40" Background="#9B59B6" Foreground="White" FontSize="14" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand" Click="BtnCloneBooking_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20"/>
                     </Style>
                 </Button.Resources>
             </Button>
+
+            <Button x:Name="btnBookNow" Grid.Column="5" Content="ЗАБРОНИРОВАТЬ" Width="200" Height="40" Background="#27AE60" Foreground="White" FontSize="14" FontWeight="Bold" BorderThickness="0" Cursor="Hand" Click="btnBookNow_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button x:Name="btnTest" Content="Тест ListBox" Width="120" Height="30" Click="BtnTest_Click"/>
         </Grid>
 
         <!-- Статус бар -->
-        <StatusBar Grid.Row="4" 
-                   Margin="0,10,0,0" 
-                   Background="Transparent">
+        <StatusBar Grid.Row="4" Margin="0,10,0,0" Background="Transparent">
             <StatusBarItem>
-                <TextBlock x:Name="txtStatus" 
-                           Text="Готов к бронированию" 
-                           Foreground="#7F8C8D"/>
+                <TextBlock x:Name="txtStatus" Text="Готов к бронированию" Foreground="#7F8C8D"/>
             </StatusBarItem>
         </StatusBar>
     </Grid>
